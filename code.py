@@ -44,7 +44,7 @@ def M1(data, params):
             e = np.exp(-data[i,j]*params[0]*(i-1))
             p = p * 1/(1+e)
     return p
-            
+
 def M2(data, params):
     p = 1.
     for i in range(3):
@@ -52,7 +52,7 @@ def M2(data, params):
             e = np.exp(-data[i,j]*(params[0]*(i-1) + params[1]*(j-1)))
             p = p * 1/(1+e)
     return p
-            
+
 def M3(data, params):
     p = 1.
     for i in range(3):
@@ -105,17 +105,17 @@ def order_data_sets(data):
                 distance[i,j] = np.inf
 
     L = [];
-    D = range(data.shape[0])
-    
+    D = list(range(data.shape[0]))
+
     # Chose start of data set L as argmin
     LL = data.argmin()
-    
+
     D.remove(LL)
     L.append(LL)
-    
+
     while len(D) != 0:
         N = []
-        
+
         # Find set of points in D with L as nearest neighbour
         for k in range(len(D)):
             # Get the nearest neighbour to D[k]
@@ -133,25 +133,33 @@ def order_data_sets(data):
     return L
 
 data = np.zeros([4,512])
-d = generateDataset()
+d = generate_D()
 
 for j in range(512):
     data[0][j]=marginalise(d[j], 0, None)
     data[1][j]=marginalise(d[j], 1, params1)
     data[2][j]=marginalise(d[j], 2, params2)
     data[3][j]=marginalise(d[j], 3, params3)
-    
+
 index = order_data_sets(np.sum(data, axis=0))
+
+plt.figure(1)
+plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
+plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
+plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
+plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
+plt.xlabel("All data sets, $\mathcal{D}$")
+plt.ylabel("Evidence")
+plt.legend()
+
+plt.figure(2)
 plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
 plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
 plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
 plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
 plt.xlim(0, 80)
+plt.xlabel("Subset of possible data sets, $\mathcal{D}$")
+plt.ylabel("Evidence")
 plt.legend()
-plt.show()
-plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
-plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
-plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
-plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
-plt.legend()
+
 plt.show()
