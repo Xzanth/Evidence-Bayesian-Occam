@@ -14,11 +14,37 @@ What it shows
 
 ## Results
 
-Put graphs and images here
-
 ![All data sets](all_data_sets.png)
 
 ![Subset data sets](subset_data_sets.png)
+
+Dataset that maximises P(D|M&#8320;)
+```
+o o o 
+o o o 
+o o o 
+```
+
+Dataset that maximises P(D|M&#8321;)
+```
+x x x 
+o o o 
+o o o 
+```
+
+Dataset that maximises P(D|M&#8322;)
+```
+x o o 
+x o o 
+x x o 
+```
+
+Dataset that maximises P(D|M&#8323;)
+```
+x x x 
+x x x 
+x x x 
+```
 
 ### Prerequisites
 
@@ -39,8 +65,8 @@ For `matplotlib.pyplot` graphs:
 ./main.py graph
 ```
 
-For TikZ diagrams:
+For the maximal evidence datasets:
 
 ```
-./main.py grid
+./main.py draw
 ```

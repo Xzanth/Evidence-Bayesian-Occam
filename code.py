@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 from __future__ import print_function
 
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools as it
@@ -16,22 +18,16 @@ def generate_D():
         D.append(np.reshape(np.asarray(d),(3,3)))
     return D
 
-beg = r'\begin{tabular}{ c c c}'
-circ = r'\tikz\draw[red,fill=red] (0,0) circle (.5ex); &'
-cros = r'\tikz\draw (0,0) node[cross=0.5ex] {}; &'
-dash = r'\\'
-end = r'\end{tabular}'
-
-def draw_D(data):
-    print(beg)
+def draw_D(data, m):
+    print("Maximal dataset for M{}".format(m))
     for i in range(3):
         for j in range(3):
             if data[i][j] == -1:
-                print(circ,end=" ")
+                print("o", end=" ")
             else:
-                print(cros,end=" ")
-        print(dash)
-    print(end)
+                print("x", end=" ")
+        print()
+    print()
 
 # Represent each model
 
@@ -143,23 +139,30 @@ for j in range(512):
 
 index = order_data_sets(np.sum(data, axis=0))
 
-plt.figure(1)
-plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
-plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
-plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
-plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
-plt.xlabel("All data sets, $\mathcal{D}$")
-plt.ylabel("Evidence")
-plt.legend()
+def graph(data):
+    plt.figure(1)
+    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
+    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
+    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
+    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
+    plt.xlabel("All data sets, $\mathcal{D}$")
+    plt.ylabel("Evidence")
+    plt.legend()
 
-plt.figure(2)
-plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
-plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
-plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
-plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
-plt.xlim(0, 80)
-plt.xlabel("Subset of possible data sets, $\mathcal{D}$")
-plt.ylabel("Evidence")
-plt.legend()
+    plt.figure(2)
+    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
+    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
+    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
+    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
+    plt.xlim(0, 80)
+    plt.xlabel("Subset of possible data sets, $\mathcal{D}$")
+    plt.ylabel("Evidence")
+    plt.legend()
 
-plt.show()
+    plt.show()
+
+if (sys.argv[1] == "graph"):
+    graph(data)
+elif (sys.argv[1] == "draw"):
+    [draw_D(d[dat.tolist().index(max(dat))], m) for m, dat in enumerate(data)]
+
