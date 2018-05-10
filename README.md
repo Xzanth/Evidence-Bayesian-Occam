@@ -18,28 +18,28 @@ What it shows
 
 ![Subset data sets](subset_data_sets.png)
 
-Dataset that maximises P(D|M&#8320;)
+Dataset that maximises P(D|H&#8320;)
 ```
 o o o 
 o o o 
 o o o 
 ```
 
-Dataset that maximises P(D|M&#8321;)
+Dataset that maximises P(D|H&#8321;)
 ```
 x x x 
 o o o 
 o o o 
 ```
 
-Dataset that maximises P(D|M&#8322;)
+Dataset that maximises P(D|H&#8322;)
 ```
 x o o 
 x o o 
 x x o 
 ```
 
-Dataset that maximises P(D|M&#8323;)
+Dataset that maximises P(D|H&#8323;)
 ```
 x x x 
 x x x 

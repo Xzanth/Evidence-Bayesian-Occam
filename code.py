@@ -19,7 +19,7 @@ def generate_D():
     return D
 
 def draw_D(data, m):
-    print("Maximal dataset for M{}".format(m))
+    print("Maximal dataset for H{}".format(m))
     for i in range(3):
         for j in range(3):
             if data[i][j] == -1:
@@ -31,7 +31,7 @@ def draw_D(data, m):
 
 # Represent each model
 
-#def M0 -- inline in marginalise function
+#def H0 -- inline in marginalise function
 
 def M1(data, params):
     p = 1.0
@@ -141,19 +141,19 @@ index = order_data_sets(np.sum(data, axis=0))
 
 def graph(data):
     plt.figure(1)
-    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
-    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
-    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
-    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
+    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{H}_3$)")
+    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{H}_2$)")
+    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{H}_1$)")
+    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{H}_0$)")
     plt.xlabel("All data sets, $\mathcal{D}$")
     plt.ylabel("Evidence")
     plt.legend()
 
     plt.figure(2)
-    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{M}_3$)")
-    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{M}_2$)")
-    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{M}_1$)")
-    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{M}_0$)")
+    plt.plot(data[3, index], 'g', label= "P($\mathcal{D}|{H}_3$)")
+    plt.plot(data[2, index], 'r', label= "P($\mathcal{D}|{H}_2$)")
+    plt.plot(data[1, index], 'b', label= "P($\mathcal{D}|{H}_1$)")
+    plt.plot(data[0, index], 'm--', label = "P($\mathcal{D}|{H}_0$)")
     plt.xlim(0, 80)
     plt.xlabel("Subset of possible data sets, $\mathcal{D}$")
     plt.ylabel("Evidence")
