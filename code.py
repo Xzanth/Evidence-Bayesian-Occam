@@ -128,6 +128,10 @@ def order_data_sets(data):
         L.append(LL)
     return L
 
+if (len(sys.argv) < 2):
+    print("Please supply either graph or draw as an argument")
+    exit(1)
+
 data = np.zeros([4,512])
 d = generate_D()
 
