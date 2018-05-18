@@ -75,11 +75,11 @@ TikZ code for formatting in LaTeX
 For `matplotlib.pyplot` graphs:
 
 ```
-./main.py graph
+./code.py graph
 ```
 
 For the maximal evidence datasets:
 
 ```
-./main.py draw
+./code.py draw
 ```
